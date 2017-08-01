@@ -79,10 +79,12 @@ namespace Snake
 
         public void Draw()
         {
-            _gameField.Field[Head.Y][Head.X] = "O";
+            _gameField.Field[Head.Y][Head.X].Val = "O";
+            _gameField.Field[Head.Y][Head.X].Color = ConsoleColor.Green;
             foreach (Point t in Tail)
             {
-                _gameField.Field[t.Y][t.X] = "o";
+                _gameField.Field[t.Y][t.X].Val = "o";
+                _gameField.Field[t.Y][t.X].Color = ConsoleColor.Green;
             }
         }
     }

@@ -11,8 +11,8 @@ namespace Snake
         public int Width { get; set; }
         public int Height { get; set; }
 
-        private List<List<string>> _field  = new List<List<string>>();
-        public List<List<string>> Field
+        private List<List<Cell>> _field  = new List<List<Cell>>();
+        public List<List<Cell>> Field
         {
             get { return _field; }
         }
@@ -25,12 +25,13 @@ namespace Snake
 
         private void InitField()
         {
-            for (int i = 0; i < Width; i++)
+            for (int i = 0; i < Height; i++)
             {
-                List<string> lRow = new List<string>();
-                for (int j = 0; j < Height; j++)
+                List<Cell> lRow = new List<Cell>();
+                for (int j = 0; j < Width; j++)
                 {
-                    lRow.Add(" ");
+                    Cell lCell = new Cell(" ", ConsoleColor.White);
+                    lRow.Add(lCell);
                 }
                 _field.Add(lRow);
             }
@@ -38,12 +39,13 @@ namespace Snake
 
         public void ClearField()
         {
-            for (int i = 0; i < Width; i++)
+            for (int i = 0; i < Height; i++)
             {
-                List<string> lRow = new List<string>();
-                for (int j = 0; j < Height; j++)
+                //List<string> lRow = new List<string>();
+                for (int j = 0; j < Width; j++)
                 {
-                    _field[i][j] = " ";
+                    _field[i][j].Val = " ";
+                    _field[i][j].Color = ConsoleColor.White;
                 }
             }
         }
@@ -52,26 +54,38 @@ namespace Snake
         {
             Console.Clear();
             Console.CursorVisible = false;
-            
+            Console.ForegroundColor = ConsoleColor.Red;
             for (int i = 0; i < Width + 2; i++)
             {
                 Console.Write("#");
             }
             Console.WriteLine();
+            //Console.ForegroundColor = ConsoleColor.White;
             for (int i = 0; i < Height; i++)
             {
                 for (int j = 0; j < Width + 2; j++)
                 {
-                    if (j == 0 || j == Width + 1) Console.Write("#");
-                    else Console.Write(_field[i][j - 1]);
+                    if (j == 0 || j == Width + 1)
+                    {
+                        Console.ForegroundColor = ConsoleColor.Red;
+                        Console.Write("#");
+                        //Console.ForegroundColor = ConsoleColor.White;
+                    }
+                    else
+                    {
+                        Console.ForegroundColor = _field[i][j - 1].Color;
+                        Console.Write(_field[i][j - 1].Val);
+                    }
                 }
                 Console.WriteLine();
             }
+            Console.ForegroundColor = ConsoleColor.Red;
             for (int i = 0; i < Width + 2; i++)
             {
                 Console.Write("#");
             }
             Console.WriteLine();
+            //Console.ForegroundColor = ConsoleColor.White;
         }
     }
 }

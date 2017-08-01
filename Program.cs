@@ -11,7 +11,7 @@ namespace Snake
         
         static void Main(string[] args)
         {
-            Game Game = new Game(20, 20);
+            Game Game = new Game(40, 20);
             bool _gameOver = false;
             while (!_gameOver)
             {
