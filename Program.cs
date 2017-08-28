@@ -12,15 +12,7 @@ namespace Snake
         static void Main(string[] args)
         {
             Game Game = new Game(40, 20);
-            bool _gameOver = false;
-            while (!_gameOver)
-            {
-                _gameOver = Game.Input();
-                _gameOver = Game.Logic();
-                Game.Draw();
-                System.Threading.Thread.Sleep(100);
-            }
-            
+            Game.Run();
         }
     }
 }

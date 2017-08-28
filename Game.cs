@@ -12,6 +12,7 @@ namespace Snake
         private Snake _snake;
         private Fruit _fruit;
         private GameField _gameField;
+        private bool _gameOver; 
 
         public Game(int aWidth, int aHeight)
         {
@@ -20,9 +21,10 @@ namespace Snake
             _snake.SetField(_gameField);
             _fruit = new Fruit(_rand.Next(aWidth), _rand.Next(aHeight));
             _fruit.SetField(_gameField);
+            _gameOver = false;
         }
 
-        public bool Input()
+        private bool Input()
         {
             ConsoleKeyInfo lKey = new ConsoleKeyInfo();
             if (Console.KeyAvailable)
@@ -52,7 +54,7 @@ namespace Snake
             return false;
         }
 
-        public bool Logic()
+        private bool Logic()
         {
             _gameField.ClearField();
             if (_snake.Head.X == _fruit.X && _snake.Head.Y == _fruit.Y)
@@ -74,11 +76,22 @@ namespace Snake
         }
 
 
-        public void Draw()
+        private void Draw()
         {
             _snake.Draw();
             _fruit.Draw();
             _gameField.Draw();
+        }
+
+        public void Run()
+        {
+            while (!_gameOver)
+            {
+                _gameOver = Input();
+                _gameOver = Logic();
+                Draw();
+                System.Threading.Thread.Sleep(100);
+            }
         }
     }
 
