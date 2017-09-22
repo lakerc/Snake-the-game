@@ -84,6 +84,11 @@ namespace SnakeGame
                     break;
             }
 
+            if (Head.X > _gameField.Width - 1) Head.X = 0;
+            if (Head.X < 0) Head.X = _gameField.Width - 1;
+            if (Head.Y > _gameField.Height - 1) Head.Y = 0;
+            if (Head.Y < 0) Head.Y = _gameField.Height - 1;
+
         }
 
         public void Draw()

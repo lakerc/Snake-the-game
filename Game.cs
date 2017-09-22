@@ -56,10 +56,7 @@ namespace SnakeGame
             _gameField.ClearField();
 
             _snake.Move();
-            if (_snake.Head.X > _gameField.Width - 1) _snake.Head.X = 0;
-            if (_snake.Head.X < 0) _snake.Head.X = _gameField.Width - 1;
-            if (_snake.Head.Y > _gameField.Height - 1) _snake.Head.Y = 0;
-            if (_snake.Head.Y < 0) _snake.Head.Y = _gameField.Height - 1;
+
             
             foreach (var i in _snake.Tail)
             {
