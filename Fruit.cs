@@ -9,15 +9,14 @@ namespace SnakeGame
     public class Fruit : IDrawable
     {
         private GameField _gameField;
-        private int _x;
-        public int X { get { return _x; } }
-        private int _y;
-        public int Y { get { return _y; } }
+        private Point _position;
+
+        public int X { get { return _position.X; } }
+        public int Y { get { return _position.Y; } }
 
         public Fruit(int aX, int aY)
         {
-            _x = aX;
-            _y = aY;
+            _position = new Point(aX, aY);
         }
         public void SetField(GameField aGameField)
         {
@@ -26,13 +25,13 @@ namespace SnakeGame
 
         public void ResetPosition(int aX, int aY)
         {
-            _x = aX;
-            _y = aY;
+            _position = new Point(aX, aY);
         }
+
         public void Draw()
         {
-            _gameField.Field[_y][_x].Val = "$";
-            _gameField.Field[_y][_x].Color = ConsoleColor.Yellow;
+            _gameField.Field[Y][X].Val = "$";
+            _gameField.Field[Y][X].Color = ConsoleColor.Yellow;
         }
 
     }
