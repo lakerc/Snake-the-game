@@ -18,18 +18,20 @@ namespace SnakeGame
             get { return _tail; }
         }
 
-        public Snake(int aStartX, int aStartY)
+        public Snake(Point point, GameField gameField)
         {
-            Head = new Point(aStartX, aStartY);
+            Head = new Point(point.X, point.Y);
+            SetField(gameField);
         }
 
         public void SetField(GameField aGameField)
         {
             _gameField = aGameField;
         }
-        public void Eat()
+        public void Eat(Fruit f)
         {
-            _tail.Insert(0,new Point(Head.X,Head.Y));
+            _tail.Insert(0, new Point(Head.X,Head.Y));
+            f.ResetPosition(_gameField.RandomPointInField());
         }
 
 
@@ -58,6 +60,12 @@ namespace SnakeGame
         {
             _tail.Insert(0, new Point(Head.X, Head.Y));
             _tail.RemoveAt(_tail.Count - 1);
+
+            if (Head.Equals(_gameField.Fruits[0].Position))
+            {
+                Eat(_gameField.Fruits[0]);
+            }
+
             switch (Dir)
             {
                 case Direction.Left:
@@ -75,6 +83,7 @@ namespace SnakeGame
                 default:
                     break;
             }
+
         }
 
         public void Draw()
