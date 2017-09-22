@@ -8,19 +8,16 @@ namespace SnakeGame
 {
     public class Game 
     {
-        private Random _rand = new Random(); 
+
         private Snake _snake;
-        private Fruit _fruit;
         private GameField _gameField;
         private bool _gameOver; 
 
         public Game(int aWidth, int aHeight)
         {
             _gameField = new GameField(aWidth, aHeight);
-            _snake = new Snake(aWidth / 2, aHeight / 2);
+            _snake = new Snake(new Point(aWidth / 2, aHeight / 2), _gameField);
             _snake.SetField(_gameField);
-            _fruit = new Fruit(_rand.Next(aWidth), _rand.Next(aHeight));
-            _fruit.SetField(_gameField);
             _gameOver = false;
         }
 
@@ -57,11 +54,7 @@ namespace SnakeGame
         private bool Logic()
         {
             _gameField.ClearField();
-            if (_snake.Head.X == _fruit.X && _snake.Head.Y == _fruit.Y)
-            {
-                _fruit.ResetPosition(_rand.Next(_gameField.Width), _rand.Next(_gameField.Height));
-                _snake.Eat();
-            }
+
             _snake.Move();
             if (_snake.Head.X > _gameField.Width - 1) _snake.Head.X = 0;
             if (_snake.Head.X < 0) _snake.Head.X = _gameField.Width - 1;
@@ -79,7 +72,12 @@ namespace SnakeGame
         private void Draw()
         {
             _snake.Draw();
-            _fruit.Draw();
+
+            foreach(Fruit f in _gameField.Fruits)
+            {
+                f.Draw();
+            }
+
             _gameField.Draw();
         }
 

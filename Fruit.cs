@@ -11,27 +11,30 @@ namespace SnakeGame
         private GameField _gameField;
         private Point _position;
 
-        public int X { get { return _position.X; } }
-        public int Y { get { return _position.Y; } }
-
-        public Fruit(int aX, int aY)
+        public Point Position
         {
-            _position = new Point(aX, aY);
+            get { return _position; }
+        }
+
+        public Fruit(Point point, GameField gameField)
+        {
+            _position = new Point(point.X, point.Y);
+            SetField(gameField);
         }
         public void SetField(GameField aGameField)
         {
             _gameField = aGameField;
         }
 
-        public void ResetPosition(int aX, int aY)
+        public void ResetPosition(Point point)
         {
-            _position = new Point(aX, aY);
+            _position = new Point(point.X, point.Y);
         }
 
         public void Draw()
         {
-            _gameField.Field[Y][X].Val = "$";
-            _gameField.Field[Y][X].Color = ConsoleColor.Yellow;
+            _gameField.Field[Position.Y][Position.X].Val = "$";
+            _gameField.Field[Position.Y][Position.X].Color = ConsoleColor.Yellow;
         }
 
     }

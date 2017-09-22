@@ -8,6 +8,9 @@ namespace SnakeGame
 {
     public class GameField
     {
+
+        private Random _rand = new Random();
+
         public int Width { get; set; }
         public int Height { get; set; }
 
@@ -16,11 +19,20 @@ namespace SnakeGame
         {
             get { return _field; }
         }
+
+        private List<Fruit> _fruits = new List<Fruit>();
+        public List<Fruit> Fruits
+        {
+            get { return _fruits; }
+        }
+
         public GameField(int aWidth, int aHeight)
         {
             Width = aWidth;
             Height = aHeight;
             InitField();
+
+            _fruits.Add(new Fruit(new Point(_rand.Next(aWidth), _rand.Next(aHeight)), this));
         }
 
         private void InitField()
@@ -48,6 +60,11 @@ namespace SnakeGame
                     _field[i][j].Color = ConsoleColor.White;
                 }
             }
+        }
+
+        public Point RandomPointInField()
+        {
+            return new Point(_rand.Next(Width), _rand.Next(Height));
         }
 
         public void Draw()
