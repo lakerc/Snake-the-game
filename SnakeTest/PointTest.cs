@@ -1,13 +1,13 @@
 ﻿using System;
 using SnakeGame;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
+using NUnit.Framework;
 
 namespace SnakeTest
 {
-    [TestClass]
+    [TestFixture]
     public class PointTest
     {
-        [TestMethod]
+        [Test]
         public void TestPointEqual()
         {
             Point p = new Point(0, 0);
@@ -17,7 +17,7 @@ namespace SnakeTest
             Assert.AreNotSame(p, p2);
         }
 
-        [TestMethod]
+        [Test]
         public void TestPointNotEqual()
         {
             Point p = new Point(0, 0);

@@ -1,13 +1,13 @@
 ﻿using System;
 using SnakeGame;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
+using NUnit.Framework;
 
 namespace SnakeGameTest
 {
-    [TestClass]
+    [TestFixture]
     public class SnakeTest
     {
-        [TestMethod]
+        [Test]
         public void SnakeMoveUpTest()
         {
             Snake s = new Snake(new Point(0, 0), new GameField(20, 20));
@@ -17,7 +17,7 @@ namespace SnakeGameTest
             Assert.AreEqual(-1, s.Head.Y);
         }
 
-        [TestMethod]
+        [Test]
         public void SnakeMoveDownTest()
         {
             Snake s = new Snake(new Point(0, 0), new GameField(20, 20));
@@ -27,7 +27,7 @@ namespace SnakeGameTest
             Assert.AreEqual(1, s.Head.Y);
         }
 
-        [TestMethod]
+        [Test]
         public void SnakeMoveRightTest()
         {
             Snake s = new Snake(new Point(0, 0), new GameField(20, 20));
@@ -37,7 +37,7 @@ namespace SnakeGameTest
             Assert.AreEqual(1, s.Head.X);
         }
 
-        [TestMethod]
+        [Test]
         public void SnakeMoveLeftTest()
         {
             Snake s = new Snake(new Point(0, 0), new GameField(20, 20));
@@ -47,7 +47,7 @@ namespace SnakeGameTest
             Assert.AreEqual(-1, s.Head.X);
         }
 
-        [TestMethod]
+        [Test]
         public void SnakeEatTest()
         {
             GameField field = new GameField(20, 20);
