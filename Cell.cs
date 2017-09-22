@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Snake
+namespace SnakeGame
 {
-    class Cell
+    public class Cell
     {
         public string Val { get; set; }
         public ConsoleColor Color { get; set; }

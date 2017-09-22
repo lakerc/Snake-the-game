@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Snake
+namespace SnakeGame
 {
-    class Program
+    public class Program
     {
         
         static void Main(string[] args)

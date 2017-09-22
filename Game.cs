@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Snake
+namespace SnakeGame
 {
-    class Game 
+    public class Game 
     {
         private Random _rand = new Random(); 
         private Snake _snake;

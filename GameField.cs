@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Snake
+namespace SnakeGame
 {
-    class GameField
+    public class GameField
     {
         public int Width { get; set; }
         public int Height { get; set; }

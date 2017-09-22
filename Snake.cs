@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Snake
+namespace SnakeGame
 {
-    class Snake : IMovable, IDrawable
+    public class Snake : IMovable, IDrawable
     {
         private enum Direction { Stop = 0, Left, Right, Up, Down }
         private Direction Dir = Direction.Stop;

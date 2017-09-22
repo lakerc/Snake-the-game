@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Snake
+namespace SnakeGame
 {
-    class Fruit : IDrawable
+    public class Fruit : IDrawable
     {
         private GameField _gameField;
         private int _x;

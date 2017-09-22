@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Snake
+namespace SnakeGame
 {
-    interface IMovable
+    public interface IMovable
     {
         void DirectionLeft();
         void DirectionRight();
