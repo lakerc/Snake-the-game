@@ -16,5 +16,12 @@ namespace SnakeGame
             X = aX;
             Y = aY;
         }
+
+        public override bool Equals(object o)
+        {
+            Point p = (Point)o;
+            return X == p.X && Y == p.Y;
+        }
+
     }
 }
