@@ -28,20 +28,20 @@ namespace SnakeGame
             {
                 lKey = Console.ReadKey(true);
             }
-          
+
             switch (lKey.Key)
             {
                 case ConsoleKey.LeftArrow:
-                    _snake.DirectionLeft();
+                    _snake.SetDirection(Direction.Left);
                     break;
                 case ConsoleKey.RightArrow:
-                    _snake.DirectionRight();
+                    _snake.SetDirection(Direction.Right);
                     break;
                 case ConsoleKey.UpArrow:
-                    _snake.DirectionUp();
+                    _snake.SetDirection(Direction.Up);
                     break;
                 case ConsoleKey.DownArrow:
-                    _snake.DirectionDown();
+                    _snake.SetDirection(Direction.Down);
                     break;
                 case ConsoleKey.Q:
                     return true;

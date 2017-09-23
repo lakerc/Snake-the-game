@@ -11,7 +11,7 @@ namespace SnakeGameTest
         public void SnakeMoveUpTest()
         {
             Snake s = new Snake(new Point(10, 10), new GameField(20, 20));
-            s.DirectionUp();
+            s.SetDirection(Direction.Up);
             s.Move();
 
             Assert.AreEqual(9, s.Head.Y);
@@ -22,7 +22,7 @@ namespace SnakeGameTest
         public void SnakeMoveDownTest()
         {
             Snake s = new Snake(new Point(10, 10), new GameField(20, 20));
-            s.DirectionDown();
+            s.SetDirection(Direction.Down);
             s.Move();
 
             Assert.AreEqual(11, s.Head.Y);
@@ -33,7 +33,7 @@ namespace SnakeGameTest
         public void SnakeMoveRightTest()
         {
             Snake s = new Snake(new Point(10, 10), new GameField(20, 20));
-            s.DirectionRight();
+            s.SetDirection(Direction.Right);
             s.Move();
 
             Assert.AreEqual(11, s.Head.X);
@@ -44,7 +44,7 @@ namespace SnakeGameTest
         public void SnakeMoveLeftTest()
         {
             Snake s = new Snake(new Point(10, 10), new GameField(20, 20));
-            s.DirectionLeft();
+            s.SetDirection(Direction.Left);
             s.Move();
 
             Assert.AreEqual(9, s.Head.X);
@@ -58,8 +58,8 @@ namespace SnakeGameTest
             field.Fruits[0].ResetPosition(new Point(11, 10));
 
             Snake s = new Snake(new Point(10, 10), field);
-            
-            s.DirectionRight();
+
+            s.SetDirection(Direction.Right);
             s.Move();
             s.Move();
 

@@ -6,12 +6,11 @@ using System.Threading.Tasks;
 
 namespace SnakeGame
 {
+    public enum Direction { Stop = 0, Left, Right, Up, Down };
+
     public interface IMovable
     {
-        void DirectionLeft();
-        void DirectionRight();
-        void DirectionUp();
-        void DirectionDown();
+        void SetDirection(Direction direction);
         void Move();
     }
 }

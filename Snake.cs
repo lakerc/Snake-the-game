@@ -8,15 +8,17 @@ namespace SnakeGame
 {
     public class Snake : IMovable, IDrawable
     {
-        private enum Direction { Stop = 0, Left, Right, Up, Down }
         private Direction Dir = Direction.Stop;
+
         private GameField _gameField;
+
         public Point Head { get; set; }
         private List<Point> _tail = new List<Point>();
         public List<Point> Tail
         {
             get { return _tail; }
         }
+    
 
         public Snake(Point point, GameField gameField)
         {
@@ -34,28 +36,11 @@ namespace SnakeGame
             f.ResetPosition(_gameField.RandomPointInField());
         }
 
-
-
-        public void DirectionLeft()
+        public void SetDirection(Direction direction)
         {
-            Dir = Direction.Left;
+            Dir = direction;
         }
-
-        public void DirectionRight()
-        {
-            Dir = Direction.Right;
-        }
-
-        public void DirectionUp()
-        {
-            Dir = Direction.Up;
-        }
-
-        public void DirectionDown()
-        {
-            Dir = Direction.Down;
-        }
-
+        
         public void Move()
         {
             _tail.Insert(0, new Point(Head.X, Head.Y));
@@ -101,5 +86,6 @@ namespace SnakeGame
                 _gameField.Field[t.Y][t.X].Color = ConsoleColor.Green;
             }
         }
+        
     }
 }
