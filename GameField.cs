@@ -1,5 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
+
+using OpenTK;
+using OpenTK.Graphics.OpenGL;
+
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -14,7 +18,12 @@ namespace SnakeGame
         public int Width { get; set; }
         public int Height { get; set; }
 
-        private List<List<Cell>> _field  = new List<List<Cell>>();
+        private static Texture _texture = null;
+        private int _textureSize = 32;
+        public int TextureSize { get { return _textureSize; } }
+
+
+        private List<List<Cell>> _field = new List<List<Cell>>();
         public List<List<Cell>> Field
         {
             get { return _field; }
@@ -26,12 +35,24 @@ namespace SnakeGame
             get { return _fruits; }
         }
 
+
+        private List<Snake> _snakes = new List<Snake>();
+        public List<Snake> Snakes
+        {
+            get { return _snakes; }
+        }
+
         public GameField(int aWidth, int aHeight)
         {
             Width = aWidth;
             Height = aHeight;
             InitField();
 
+            if(_texture == null)
+            {
+                _texture = Texture.LoadFromFile("textures/grass.png");
+            }
+            
             _fruits.Add(new Fruit(new Point(_rand.Next(aWidth), _rand.Next(aHeight)), this));
         }
 
@@ -66,43 +87,32 @@ namespace SnakeGame
         {
             return new Point(_rand.Next(Width), _rand.Next(Height));
         }
+        
 
         public void Draw()
         {
-            Console.Clear();
-            Console.CursorVisible = false;
-            Console.ForegroundColor = ConsoleColor.Red;
-            for (int i = 0; i < Width + 2; i++)
-            {
-                Console.Write("#");
-            }
-            Console.WriteLine();
-            //Console.ForegroundColor = ConsoleColor.White;
-            for (int i = 0; i < Height; i++)
-            {
-                for (int j = 0; j < Width + 2; j++)
-                {
-                    if (j == 0 || j == Width + 1)
-                    {
-                        Console.ForegroundColor = ConsoleColor.Red;
-                        Console.Write("#");
-                        //Console.ForegroundColor = ConsoleColor.White;
-                    }
-                    else
-                    {
-                        Console.ForegroundColor = _field[i][j - 1].Color;
-                        Console.Write(_field[i][j - 1].Val);
-                    }
-                }
-                Console.WriteLine();
-            }
-            Console.ForegroundColor = ConsoleColor.Red;
-            for (int i = 0; i < Width + 2; i++)
-            {
-                Console.Write("#");
-            }
-            Console.WriteLine();
-            //Console.ForegroundColor = ConsoleColor.White;
+
+            GL.BindTexture(TextureTarget.Texture2D, _texture.ID);
+
+            GL.TexParameter(TextureTarget.Texture2D, TextureParameterName.TextureWrapS, (int)TextureWrapMode.Repeat);
+            GL.TexParameter(TextureTarget.Texture2D, TextureParameterName.TextureWrapT, (int)TextureWrapMode.Repeat);
+
+
+            GL.Begin(PrimitiveType.Quads);
+            GL.Color4(1f, 1f, 1f, 1f);
+            
+            GL.TexCoord2(0, 0);
+            GL.Vertex3(0, 0, -8);
+            GL.TexCoord2(0, Height/3);
+            GL.Vertex3(0, Height*32, -8);
+            GL.TexCoord2(Width/3, Height/3);
+            GL.Vertex3(Width * 32, Height * 32, -8);
+
+            GL.TexCoord2(Width/3, 0);
+            GL.Vertex3(Width * 32, 0, -8);
+
+            GL.End();
+
         }
     }
 }

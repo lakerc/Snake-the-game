@@ -11,8 +11,10 @@ namespace SnakeGame
         
         static void Main(string[] args)
         {
-            Game Game = new Game(40, 20);
-            Game.Run();
+            using(Game game = new Game(25, 25))
+            {
+                game.Run(10, 60);
+            }
         }
     }
 }

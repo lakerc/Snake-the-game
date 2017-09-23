@@ -1,5 +1,8 @@
-﻿using System;
+﻿using OpenTK;
+using OpenTK.Graphics.OpenGL;
+using System;
 using System.Collections.Generic;
+using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -8,9 +11,14 @@ namespace SnakeGame
 {
     public class Snake : IMovable, IDrawable
     {
-        private Direction Dir = Direction.Stop;
+        private Direction Dir = Direction.Up;
 
         private GameField _gameField;
+
+        private static Texture _snakeHeadTex = null;
+        private static Texture _snakeBodyTex = null;
+
+        Vector4 _snakeColor = new Vector4(175/255f, 96/255f, 255/255f, 1);
 
         public Point Head { get; set; }
         private List<Point> _tail = new List<Point>();
@@ -24,6 +32,16 @@ namespace SnakeGame
         {
             Head = new Point(point.X, point.Y);
             SetField(gameField);
+
+            if(_snakeHeadTex == null)
+            {
+                _snakeHeadTex = Texture.LoadFromFile("textures/snakehead.png");
+            }
+            if(_snakeBodyTex == null)
+            {
+                _snakeBodyTex = Texture.LoadFromFile("textures/snakebody.png");
+            }
+
         }
 
         public void SetField(GameField aGameField)
@@ -43,6 +61,7 @@ namespace SnakeGame
         
         public void Move()
         {
+
             _tail.Insert(0, new Point(Head.X, Head.Y));
             _tail.RemoveAt(_tail.Count - 1);
 
@@ -78,13 +97,52 @@ namespace SnakeGame
 
         public void Draw()
         {
-            _gameField.Field[Head.Y][Head.X].Val = "O";
-            _gameField.Field[Head.Y][Head.X].Color = ConsoleColor.Green;
-            foreach (Point t in Tail)
+
+            GL.BindTexture(TextureTarget.Texture2D, _snakeHeadTex.ID);
+
+            GL.PushMatrix();
+            GL.Translate(Head.X * Cell.CELL_SIZE, Head.Y * Cell.CELL_SIZE, 0);
+
+            GL.Begin(PrimitiveType.Quads);
+            GL.Color4(_snakeColor);
+            
+
+            GL.TexCoord2(0, 0);
+            GL.Vertex3(0, 0, -6);
+            GL.TexCoord2(0, 1);
+            GL.Vertex3(0, 32, -6);
+            GL.TexCoord2(1, 1);
+            GL.Vertex3(32,  32, -6);
+            GL.TexCoord2(1, 0);
+            GL.Vertex3( 32, 0, -6);
+
+            GL.End();
+            GL.PopMatrix();
+            
+            GL.BindTexture(TextureTarget.Texture2D, _snakeBodyTex.ID);
+
+            foreach(Point p in Tail)
             {
-                _gameField.Field[t.Y][t.X].Val = "o";
-                _gameField.Field[t.Y][t.X].Color = ConsoleColor.Green;
+
+                GL.PushMatrix();
+                GL.Translate(p.X * Cell.CELL_SIZE, p.Y * Cell.CELL_SIZE, 0);
+
+                GL.Begin(PrimitiveType.Quads);
+
+                GL.TexCoord2(0, 0);
+                GL.Vertex3(0, 0, -7);
+                GL.TexCoord2(0, 1);
+                GL.Vertex3(0, 32, -7);
+                GL.TexCoord2(1, 1);
+                GL.Vertex3(32, 32, -7);
+                GL.TexCoord2(1, 0);
+                GL.Vertex3(32, 0, -7);
+
+                GL.End();
+                GL.PopMatrix();
             }
+
+
         }
         
     }

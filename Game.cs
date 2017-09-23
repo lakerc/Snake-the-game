@@ -1,94 +1,137 @@
 ﻿using System;
+using OpenTK;
+using OpenTK.Graphics.OpenGL;
+using OpenTK.Input;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using OpenTK.Graphics;
+using System.Drawing;
 
 namespace SnakeGame
 {
-    public class Game 
+    public class Game : GameWindow
     {
 
-        private Snake _snake;
         private GameField _gameField;
-        private bool _gameOver; 
+        private bool _gameOver;
 
-        public Game(int aWidth, int aHeight)
+
+        public Game(int aWidth, int aHeight) : base(32 * aWidth, 32 * aHeight)
         {
+
             _gameField = new GameField(aWidth, aHeight);
-            _snake = new Snake(new Point(aWidth / 2, aHeight / 2), _gameField);
-            _snake.SetField(_gameField);
+
+            _gameField.Snakes.Add(new Snake(new Point(aWidth / 2, aHeight / 2), _gameField));
+
             _gameOver = false;
         }
 
-        private bool Input()
+        protected override void OnLoad(EventArgs e)
         {
-            ConsoleKeyInfo lKey = new ConsoleKeyInfo();
-            if (Console.KeyAvailable)
-            {
-                lKey = Console.ReadKey(true);
-            }
+            base.OnLoad(e);
 
-            switch (lKey.Key)
-            {
-                case ConsoleKey.LeftArrow:
-                    _snake.SetDirection(Direction.Left);
-                    break;
-                case ConsoleKey.RightArrow:
-                    _snake.SetDirection(Direction.Right);
-                    break;
-                case ConsoleKey.UpArrow:
-                    _snake.SetDirection(Direction.Up);
-                    break;
-                case ConsoleKey.DownArrow:
-                    _snake.SetDirection(Direction.Down);
-                    break;
-                case ConsoleKey.Q:
-                    return true;
-                default:
-                    break;
-            }
-            return false;
+            GL.ClearColor(0.1f, 0.2f, 0.5f, 0.0f);
+            GL.Enable(EnableCap.DepthTest);
+
+            GL.Enable(EnableCap.Texture2D);
+            GL.Enable(EnableCap.AlphaTest);
+            GL.AlphaFunc(AlphaFunction.Gequal, 0.5f);
         }
 
-        private bool Logic()
+        protected override void OnResize(EventArgs e)
         {
+            base.OnResize(e);
+
+            GL.Viewport(ClientRectangle.X, ClientRectangle.Y, ClientRectangle.Width, ClientRectangle.Height);
+
+            Matrix4 orth = Matrix4.CreateOrthographicOffCenter(0, Width, Height, 0, 1.0f, 64.0f);
+            GL.MatrixMode(MatrixMode.Projection);
+            GL.LoadMatrix(ref orth);
+        }
+
+        protected override void OnRenderFrame(FrameEventArgs e)
+        {
+            base.OnRenderFrame(e);
+
+            GL.Clear(ClearBufferMask.ColorBufferBit | ClearBufferMask.DepthBufferBit);
+
+            Matrix4 modelview = Matrix4.LookAt(Vector3.Zero, -Vector3.UnitZ, Vector3.UnitY);
+            GL.MatrixMode(MatrixMode.Modelview);
+            GL.LoadMatrix(ref modelview);
+
+            //Meat
+            {
+
+                _gameField.Draw();
+
+                foreach(Snake s in _gameField.Snakes)
+                {
+                    s.Draw();
+                }
+
+                foreach (Fruit f in _gameField.Fruits)
+                {
+                    f.Draw();
+                }
+
+
+            }
+
+            SwapBuffers();
+        }
+
+
+        protected override void OnUpdateFrame(FrameEventArgs e)
+        {
+            base.OnUpdateFrame(e);
+
             _gameField.ClearField();
 
-            _snake.Move();
-
-            
-            foreach (var i in _snake.Tail)
+            foreach(Snake s in _gameField.Snakes)
             {
-                if (i.X == _snake.Head.X && i.Y == _snake.Head.Y) return true;
+                s.Move();
             }
-            return false;
+
         }
 
-
-        private void Draw()
+        protected override void OnKeyDown(KeyboardKeyEventArgs e)
         {
-            _snake.Draw();
+            base.OnKeyDown(e);
 
-            foreach(Fruit f in _gameField.Fruits)
+            if(e.Key == Key.W)
             {
-                f.Draw();
+                foreach(Snake s in _gameField.Snakes)
+                {
+                    s.SetDirection(Direction.Up);
+                }
+            }
+            if (e.Key == Key.A)
+            {
+                foreach (Snake s in _gameField.Snakes)
+                {
+                    s.SetDirection(Direction.Left);
+                }
+            }
+            if (e.Key == Key.S)
+            {
+                foreach (Snake s in _gameField.Snakes)
+                {
+                    s.SetDirection(Direction.Down);
+                }
+            }
+            if (e.Key == Key.D)
+            {
+                foreach (Snake s in _gameField.Snakes)
+                {
+                    s.SetDirection(Direction.Right);
+                }
             }
 
-            _gameField.Draw();
         }
 
-        public void Run()
-        {
-            while (!_gameOver)
-            {
-                _gameOver = Input();
-                _gameOver = Logic();
-                Draw();
-                System.Threading.Thread.Sleep(100);
-            }
-        }
     }
 
-    
+
 }
