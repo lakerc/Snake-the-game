@@ -63,7 +63,7 @@ namespace SnakeGameTest
             s.Move();
             s.Move();
 
-            Assert.AreNotEqual(s.Tail.Count, 0);
+            Assert.AreNotEqual(0, s.Tail.Count);
             Assert.IsFalse(new Point(11, 10).Equals(field.Fruits[0].Position));
         }
 
