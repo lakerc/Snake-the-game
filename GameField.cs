@@ -42,11 +42,12 @@ namespace SnakeGame
             get { return _snakes; }
         }
 
+        //GameField constructor that takes a width and height
         public GameField(int aWidth, int aHeight)
         {
             Width = aWidth;
             Height = aHeight;
-            InitField();
+            InitField(); //obsolete
 
             if(_texture == null)
             {
@@ -56,6 +57,7 @@ namespace SnakeGame
             _fruits.Add(new Fruit(new Point(_rand.Next(aWidth), _rand.Next(aHeight)), this));
         }
 
+        //obsolete
         private void InitField()
         {
             for (int i = 0; i < Height; i++)
@@ -70,6 +72,7 @@ namespace SnakeGame
             }
         }
 
+        //obsolete
         public void ClearField()
         {
             for (int i = 0; i < Height; i++)
@@ -88,15 +91,13 @@ namespace SnakeGame
             return new Point(_rand.Next(Width), _rand.Next(Height));
         }
         
-
+        //Draw the game field
         public void Draw()
         {
-
             GL.BindTexture(TextureTarget.Texture2D, _texture.ID);
 
             GL.TexParameter(TextureTarget.Texture2D, TextureParameterName.TextureWrapS, (int)TextureWrapMode.Repeat);
             GL.TexParameter(TextureTarget.Texture2D, TextureParameterName.TextureWrapT, (int)TextureWrapMode.Repeat);
-
 
             GL.Begin(PrimitiveType.Quads);
             GL.Color4(1f, 1f, 1f, 1f);
@@ -112,7 +113,6 @@ namespace SnakeGame
             GL.Vertex3(Width * 32, 0, -8);
 
             GL.End();
-
         }
     }
 }

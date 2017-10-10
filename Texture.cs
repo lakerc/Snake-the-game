@@ -29,7 +29,7 @@ namespace SnakeGame
         public static Texture LoadFromFile(string path)
         {
             Bitmap b = new Bitmap(path);
-
+          
             int tid = GL.GenTexture();
             GL.BindTexture(TextureTarget.Texture2D, tid);
 

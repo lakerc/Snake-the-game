@@ -11,12 +11,14 @@ namespace SnakeGame
         public int X { get; set; }
         public int Y { get; set; }
 
+        //Point constructor that takes 2 ints
         public Point(int aX, int aY)
         {
             X = aX;
             Y = aY;
         }
 
+        //Equals method to see if a point matches this point
         public override bool Equals(object o)
         {
             Point p = (Point)o;

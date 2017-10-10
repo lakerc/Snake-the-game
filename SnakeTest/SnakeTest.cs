@@ -54,11 +54,15 @@ namespace SnakeGameTest
         [Test]
         public void SnakeEatTest()
         {
-            GameField field = new GameField(20, 20);
+            GameField field = null;
+            try
+            {
+                 field = new GameField(20, 20);
+            }
+            catch (System.ArgumentException ex) { Console.Write("fuck, that wasn't supposed to happen");}
+
             field.Fruits[0].ResetPosition(new Point(11, 10));
-
             Snake s = new Snake(new Point(10, 10), field);
-
             s.SetDirection(Direction.Right);
             s.Move();
             s.Move();

@@ -87,7 +87,7 @@ namespace SnakeGame
         {
             base.OnUpdateFrame(e);
 
-            _gameField.ClearField();
+            //_gameField.ClearField();
 
             foreach(Snake s in _gameField.Snakes)
             {
