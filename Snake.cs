@@ -12,8 +12,11 @@ namespace SnakeGame
     public class Snake : IMovable, IDrawable
     {
         private Direction Dir = Direction.Up;
+        protected int moveCounter = 0;
+        protected int moveCountMax = 20;//lower to make snake faster
+        protected int eatCount = 0;
 
-        private GameField _gameField;
+        protected GameField _gameField;
 
         private static Texture _snakeHeadTex = null;
         private static Texture _snakeBodyTex = null;
@@ -48,8 +51,11 @@ namespace SnakeGame
         {
             _gameField = aGameField;
         }
-        public void Eat(Fruit f)
+
+        public virtual void Eat(Fruit f)
         {
+            eatCount++;
+            System.Console.WriteLine(moveCountMax);
             _tail.Insert(0, new Point(Head.X,Head.Y));
             f.ResetPosition(_gameField.RandomPointInField());
         }
@@ -81,8 +87,12 @@ namespace SnakeGame
             }
         }
         
-        public void Move()
+        public virtual void Move()
         {
+            moveCounter++;
+            if (moveCounter < moveCountMax)
+                return;
+            moveCounter = 0;
 
             _tail.Insert(0, new Point(Head.X, Head.Y));
             _tail.RemoveAt(_tail.Count - 1);
@@ -109,11 +119,17 @@ namespace SnakeGame
                 default:
                     break;
             }
+            wrap();
+        }
 
+        //if snake goes outside play area wrap coordinates
+        private void wrap()
+        {
             if (Head.X > _gameField.Width - 1) Head.X = 0;
             if (Head.X < 0) Head.X = _gameField.Width - 1;
             if (Head.Y > _gameField.Height - 1) Head.Y = 0;
             if (Head.Y < 0) Head.Y = _gameField.Height - 1;
+<<<<<<< HEAD
 
             foreach (Snake snake in _gameField.Snakes)
             {
@@ -127,6 +143,8 @@ namespace SnakeGame
             }
 
 
+=======
+>>>>>>> a7c136511e8fcd8dafa7c247f4a61c45085cbac7
         }
 
         public void Draw()
