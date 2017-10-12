@@ -56,7 +56,29 @@ namespace SnakeGame
 
         public void SetDirection(Direction direction)
         {
-            Dir = direction;
+            if (Dir == Direction.Down && direction == Direction.Up)
+            {
+
+            }
+            else if (Dir == Direction.Up && direction == Direction.Down)
+            {
+
+
+            }
+            else if (Dir == Direction.Right && direction == Direction.Left)
+            {
+
+
+            }
+            else if (Dir == Direction.Left && direction == Direction.Right)
+            {
+
+
+            }
+            else
+            {
+                Dir = direction;
+            }
         }
         
         public void Move()
@@ -92,6 +114,18 @@ namespace SnakeGame
             if (Head.X < 0) Head.X = _gameField.Width - 1;
             if (Head.Y > _gameField.Height - 1) Head.Y = 0;
             if (Head.Y < 0) Head.Y = _gameField.Height - 1;
+
+            foreach (Snake snake in _gameField.Snakes)
+            {
+                foreach (Point p in snake.Tail)
+                {
+                    if (Head.Equals(p))
+                    {
+                        System.Environment.Exit(1);
+                    }
+                }
+            }
+
 
         }
 
