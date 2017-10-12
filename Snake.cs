@@ -129,7 +129,6 @@ namespace SnakeGame
             if (Head.X < 0) Head.X = _gameField.Width - 1;
             if (Head.Y > _gameField.Height - 1) Head.Y = 0;
             if (Head.Y < 0) Head.Y = _gameField.Height - 1;
-<<<<<<< HEAD
 
             foreach (Snake snake in _gameField.Snakes)
             {
@@ -141,10 +140,6 @@ namespace SnakeGame
                     }
                 }
             }
-
-
-=======
->>>>>>> a7c136511e8fcd8dafa7c247f4a61c45085cbac7
         }
 
         public void Draw()
