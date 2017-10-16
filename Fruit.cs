@@ -26,11 +26,7 @@ namespace SnakeGame
             get { return _position; }
         }
 
-<<<<<<< HEAD
         //Fruit constructor
-=======
-        //Fruit constuctor that takes Point and GameField parameters
->>>>>>> 4dc72c0953fc22d78da5379359f96d62f134694f
         public Fruit(Point point, GameField gameField)
         {
             _position = new Point(point.X, point.Y);
@@ -42,37 +38,19 @@ namespace SnakeGame
             }
         }
 
-<<<<<<< HEAD
         //Set the GameField
-=======
-        //Set the game field
->>>>>>> 4dc72c0953fc22d78da5379359f96d62f134694f
         public void SetField(GameField aGameField)
         {
             _gameField = aGameField;
         }
 
-<<<<<<< HEAD
         //Reset the Fruit's position
-=======
-        //return the game field
-        public GameField getField()
-        {
-            return _gameField;
-        }
-
-        //Reset the position of the fruit
->>>>>>> 4dc72c0953fc22d78da5379359f96d62f134694f
         public void ResetPosition(Point point)
         {
             _position = new Point(point.X, point.Y);
         }
 
-<<<<<<< HEAD
         //Draw the Fruit's texture
-=======
-        //Draw the fruit texture
->>>>>>> 4dc72c0953fc22d78da5379359f96d62f134694f
         public void Draw()
         {
             GL.BindTexture(TextureTarget.Texture2D, _appleTex.ID);
@@ -96,5 +74,7 @@ namespace SnakeGame
 
             GL.PopMatrix();
         }
+
     }
+
 }

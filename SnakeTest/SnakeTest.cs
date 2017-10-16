@@ -60,7 +60,6 @@ namespace SnakeGameTest
         [Test]
         public void SnakeEatTest()
         {
-<<<<<<< HEAD
 
             //Create a GameField and spawn a Fruit at 11,10
             GameField field = new GameField(20, 20);
@@ -70,17 +69,6 @@ namespace SnakeGameTest
             Snake s = new Snake(new Point(10, 10), field);
 
             //Set the Snake's Direction to Right, and move twice
-=======
-            GameField field = null;
-            try
-            {
-                 field = new GameField(20, 20);
-            }
-            catch (System.ArgumentException ex) { Console.Write("fuck, that wasn't supposed to happen");}
-
-            field.Fruits[0].ResetPosition(new Point(11, 10));
-            Snake s = new Snake(new Point(10, 10), field);
->>>>>>> 4dc72c0953fc22d78da5379359f96d62f134694f
             s.SetDirection(Direction.Right);
             s.Move();
             s.Move();
