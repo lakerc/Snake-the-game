@@ -34,7 +34,7 @@ namespace SnakeGame
 
             if(_appleTex == null)
             {
-                //_appleTex = Texture.LoadFromFile("textures/apple.png");
+                _appleTex = Texture.LoadFromFile("textures/apple.png");
             }
         }
 

@@ -59,7 +59,7 @@ namespace SnakeGame
             //Set GameField's texture
             if(_texture == null)
             {
-               //_texture = Texture.LoadFromFile("textures/grass.png");
+               _texture = Texture.LoadFromFile("textures/grass.png");
             }
             
             //Spawn a fruit somewhere in the GameField

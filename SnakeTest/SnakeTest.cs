@@ -60,7 +60,6 @@ namespace SnakeGameTest
         [Test]
         public void SnakeEatTest()
         {
-
             //Create a GameField and spawn a Fruit at 11,10
             GameField field = new GameField(20, 20);
             field.Fruits[0].ResetPosition(new Point(11, 10));

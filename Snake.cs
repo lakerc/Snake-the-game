@@ -47,11 +47,11 @@ namespace SnakeGame
             //set head and body textures
             if (_snakeHeadTex == null)
             {
-                //_snakeHeadTex = Texture.LoadFromFile("textures/snakehead.png");
+                _snakeHeadTex = Texture.LoadFromFile("textures/snakehead.png");
             }
             if (_snakeBodyTex == null)
             {
-                //_snakeBodyTex = Texture.LoadFromFile("textures/snakebody.png");
+                _snakeBodyTex = Texture.LoadFromFile("textures/snakebody.png");
             }
         }
 
