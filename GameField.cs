@@ -47,14 +47,22 @@ namespace SnakeGame
             get { return _snakes; }
         }
 
+<<<<<<< HEAD
         //GameField constructor
+=======
+        //GameField constructor that takes a width and height
+>>>>>>> 4dc72c0953fc22d78da5379359f96d62f134694f
         public GameField(int aWidth, int aHeight)
         {
             Width = aWidth;
             Height = aHeight;
+<<<<<<< HEAD
 
             //conosle ui code
             InitField();
+=======
+            InitField(); //obsolete
+>>>>>>> 4dc72c0953fc22d78da5379359f96d62f134694f
 
             //Set GameField's texture
             if(_texture == null)
@@ -65,8 +73,13 @@ namespace SnakeGame
             //Spawn a fruit somewhere in the GameField
             _fruits.Add(new Fruit(new Point(_rand.Next(aWidth), _rand.Next(aHeight)), this));
         }
+<<<<<<< HEAD
         
         //old console ui code
+=======
+
+        //obsolete
+>>>>>>> 4dc72c0953fc22d78da5379359f96d62f134694f
         private void InitField()
         {
             for (int i = 0; i < Height; i++)
@@ -81,7 +94,11 @@ namespace SnakeGame
             }
         }
 
+<<<<<<< HEAD
         //also old console ui code
+=======
+        //obsolete
+>>>>>>> 4dc72c0953fc22d78da5379359f96d62f134694f
         public void ClearField()
         {
             for (int i = 0; i < Height; i++)
@@ -101,15 +118,17 @@ namespace SnakeGame
             return new Point(_rand.Next(Width), _rand.Next(Height));
         }
         
+<<<<<<< HEAD
         //Draw GameField's texture
+=======
+        //Draw the game field
+>>>>>>> 4dc72c0953fc22d78da5379359f96d62f134694f
         public void Draw()
         {
-
             GL.BindTexture(TextureTarget.Texture2D, _texture.ID);
 
             GL.TexParameter(TextureTarget.Texture2D, TextureParameterName.TextureWrapS, (int)TextureWrapMode.Repeat);
             GL.TexParameter(TextureTarget.Texture2D, TextureParameterName.TextureWrapT, (int)TextureWrapMode.Repeat);
-
 
             GL.Begin(PrimitiveType.Quads);
             GL.Color4(1f, 1f, 1f, 1f);
@@ -125,7 +144,6 @@ namespace SnakeGame
             GL.Vertex3(Width * 32, 0, -8);
 
             GL.End();
-
         }
     }
 }

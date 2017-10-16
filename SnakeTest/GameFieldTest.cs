@@ -8,8 +8,12 @@ namespace SnakeGameTest
     [TestFixture]
     public class GameFieldTest
     {
+<<<<<<< HEAD
         //old test for console ui
         [Test]
+=======
+        /*[Test]
+>>>>>>> 4dc72c0953fc22d78da5379359f96d62f134694f
         public void InitFieldTest()
         {
             GameField gameField = new GameField(10, 10);
@@ -54,7 +58,7 @@ namespace SnakeGameTest
                 }
             }
 
-        }
+        }*/
 
         //Random point test
         [Test]
@@ -70,9 +74,14 @@ namespace SnakeGameTest
                 Assert.That(point.Y >= 0 && point.Y < 10);
             }
         }
+<<<<<<< HEAD
 
         //old test for console UI drawing
         [Test]
+=======
+        //obsolete
+        /*[Test]
+>>>>>>> 4dc72c0953fc22d78da5379359f96d62f134694f
         public void DrawTest()
         {
             GameField gameField = new GameField(5, 5);
@@ -94,9 +103,8 @@ namespace SnakeGameTest
                 string consoleOutput = stringWriter.ToString();
 
                 Assert.AreEqual(expected, consoleOutput);
-
             }
-        }
+        }*/
 
     }
 }

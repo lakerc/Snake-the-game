@@ -30,7 +30,6 @@ namespace SnakeTest
             Assert.IsFalse(p.Equals(p2));
             Assert.IsFalse(p.Equals(p3));
             Assert.IsFalse(p.Equals(p4));
-            
         }
     }
 }
