@@ -16,14 +16,18 @@ namespace SnakeGame
 
         private GameField _gameField;
         private bool _gameOver;
+        private int difficulty;//0 for normal mode, 1 for hard
 
         //Game constructor
-        public Game(int aWidth, int aHeight) : base(32 * aWidth, 32 * aHeight)
+        public Game(int aWidth, int aHeight, int difficulty) : base(32 * aWidth, 32 * aHeight)
         {
-
+            this.difficulty = difficulty;
             _gameField = new GameField(aWidth, aHeight);
 
-            _gameField.Snakes.Add(new Snake(new Point(aWidth / 2, aHeight / 2), _gameField));
+            if (difficulty == 0)
+                _gameField.Snakes.Add(new Snake(new Point(aWidth / 2, aHeight / 2), _gameField));
+            else _gameField.Snakes.Add(new SnakeHard(new Point(aWidth / 2, aHeight / 2), _gameField));
+
 
             _gameOver = false;
         }
@@ -89,10 +93,10 @@ namespace SnakeGame
         protected override void OnUpdateFrame(FrameEventArgs e)
         {
             base.OnUpdateFrame(e);
-
             _gameField.ClearField();
 
-            foreach(Snake s in _gameField.Snakes)
+
+            foreach (Snake s in _gameField.Snakes)
             {
                 s.Move();
             }

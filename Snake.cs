@@ -15,9 +15,13 @@ namespace SnakeGame
 
         //Snake Direction
         private Direction Dir = Direction.Up;
+        protected int moveCounter = 0;
+        protected int moveCountMax = 20;//lower to make snake faster
+        protected int eatCount = 0;
+
 
         //The playing field
-        private GameField _gameField;
+        protected GameField _gameField;
 
         //Texture for the Snake's head and body
         private static Texture _snakeHeadTex = null;
@@ -61,9 +65,12 @@ namespace SnakeGame
             _gameField = aGameField;
         }
 
-        //Eat fruit
-        public void Eat(Fruit f)
+        //Eat the fruit
+        public virtual void Eat(Fruit f)
         {
+            eatCount++;
+            System.Console.WriteLine(moveCountMax);
+
             //add to snake and change fruit's position
             _tail.Insert(0, new Point(Head.X,Head.Y));
             f.ResetPosition(_gameField.RandomPointInField());
@@ -72,12 +79,39 @@ namespace SnakeGame
         //Set Snake's Direction
         public void SetDirection(Direction direction)
         {
-            Dir = direction;
+            if (Dir == Direction.Down && direction == Direction.Up)
+            {
+
+            }
+            else if (Dir == Direction.Up && direction == Direction.Down)
+            {
+
+
+            }
+            else if (Dir == Direction.Right && direction == Direction.Left)
+            {
+
+
+            }
+            else if (Dir == Direction.Left && direction == Direction.Right)
+            {
+
+
+            }
+            else
+            {
+                Dir = direction;
+            }
         }
         
+
         //Move the Snake
-        public void Move()
+        public virtual void Move()
         {
+            moveCounter++;
+            if (moveCounter < moveCountMax)
+                return;
+            moveCounter = 0;
 
             _tail.Insert(0, new Point(Head.X, Head.Y));
             _tail.RemoveAt(_tail.Count - 1);
@@ -106,13 +140,27 @@ namespace SnakeGame
                 default:
                     break;
             }
+            wrap();
+        }
 
-            //wrap Snake around to the other side if it goes beyond the GameField
+        //if snake goes outside play area wrap coordinates
+        private void wrap()
+        {
             if (Head.X > _gameField.Width - 1) Head.X = 0;
             if (Head.X < 0) Head.X = _gameField.Width - 1;
             if (Head.Y > _gameField.Height - 1) Head.Y = 0;
             if (Head.Y < 0) Head.Y = _gameField.Height - 1;
 
+            foreach (Snake snake in _gameField.Snakes)
+            {
+                foreach (Point p in snake.Tail)
+                {
+                    if (Head.Equals(p))
+                    {
+                        System.Environment.Exit(1);
+                    }
+                }
+            }
         }
 
         //Draw Snake's textures
