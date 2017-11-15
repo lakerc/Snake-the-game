@@ -21,6 +21,7 @@
         public override void Eat(Fruit f)
         {
             base.Eat(f);
+            //If snake has eaten 5 times and moveCountMax isn't at its lowest, increase the snake's speed
             if (eatCount % 5 == 0 && moveCountMax > 6)
                 moveCountMax--;
         }

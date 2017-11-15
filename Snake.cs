@@ -15,8 +15,12 @@ namespace SnakeGame
 
         //Snake Direction
         private Direction Dir = Direction.Up;
+
+        //Number of moves snake makes
         protected int moveCounter = 0;
         protected int moveCountMax = 20;//lower to make snake faster
+
+        //Number of times snake has eaten
         protected int eatCount = 0;
 
 
@@ -79,6 +83,7 @@ namespace SnakeGame
         //Set Snake's Direction
         public void SetDirection(Direction direction)
         {
+            //Prevent the snake from doing a 180 into itself
             if (Dir == Direction.Down && direction == Direction.Up)
             {
 
@@ -151,6 +156,7 @@ namespace SnakeGame
             if (Head.Y > _gameField.Height - 1) Head.Y = 0;
             if (Head.Y < 0) Head.Y = _gameField.Height - 1;
 
+            //If snake hits a segment of its tail, quit the game
             foreach (Snake snake in _gameField.Snakes)
             {
                 foreach (Point p in snake.Tail)
